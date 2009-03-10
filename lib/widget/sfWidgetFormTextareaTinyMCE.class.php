@@ -57,7 +57,8 @@ class sfWidgetFormTextareaTinyMCE extends sfWidgetFormTextarea
   {
     if (!isset($attributes['class']))
     {
-      throw new InvalidArgumentException(sprintf('You must pass a "class" attribute for a TinyMCE widget (%s).', $name));
+      $attributes['class'] = 'tiny_mce';
+//      throw new InvalidArgumentException(sprintf('You must pass a "class" attribute for a TinyMCE widget (%s).', $name));
     }
 
     $textarea = parent::render($name, $value, $attributes, $errors);
