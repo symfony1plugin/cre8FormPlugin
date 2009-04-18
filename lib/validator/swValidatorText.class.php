@@ -1,8 +1,8 @@
 <?php
+
+
 /*
- *  $Id$
- *
- * (c) 2009 Thomas Rabaix <thomas.rabaix@soleoweb.com>
+ * (c) 2008 Thomas Rabaix <thomas.rabaix@soleoweb.com>
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -22,33 +22,25 @@
  */
 
 /**
- * swGMapSimpleValidator validate the address field
- *
- * @package    swToolboxPlugin
- * @subpackage widget
- * @author    Thomas Rabaix <thomas.rabaix@soleoweb.com>
- * @version    SVN: $Id$
- */
-class swValidatorGMapAddress extends sfValidatorSchema
+ * 
+ * Make sure the input is only text : a-Z, 0-1, "\n"
+ * 
+ * @author Thomas Rabaix <thomas.rabaix@gmail.com>
+ * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @link        www.soleoweb.com
+ * 
+ * SVN : $Id$
+ **/
+class swValidatorText extends sfValidatorString
 {
-  public function __construct($fields = null, $options = array(), $messages = array())
-  {
-    $fields = array(
-      'lat'     => new sfValidatorNumber(array(
-        'min' => -90,  
-        'max' => 90,
-        'required' => true
-      )),
-      'lng'     => new sfValidatorNumber(array(
-        'min' => -180, 
-        'max' => 180,
-        'required' => true
-      )),
-      'address' => new swValidatorText(array(
-        'required' => false
-      )),
-    );
-    
-    parent::__construct($fields, $options, $messages);
-  }
+
+   public function doClean($value)
+   {
+     $value = (string) $value;
+     $value = strip_tags($value); // remove tags
+     
+     $value = parent::doClean($value);
+     
+     return $value;
+   }
 }
