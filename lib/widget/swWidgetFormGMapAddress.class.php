@@ -51,12 +51,10 @@ class swWidgetFormGMapAddress extends sfWidgetFormSchema
   
   public function render($name, $value = null, $attributes = array(), $errors = array())
   {
-    
     if(!is_null($value) && !is_array($value)) {
       $mapArray = explode('|', $value);
       $value = array('lat' => $mapArray[0], 'lng' => $mapArray[1]);
     }
-    
     // generate field id
     $lat_id     = $this->generateId($name.'[lat]');
     $lng_id     = $this->generateId($name.'[lng]');

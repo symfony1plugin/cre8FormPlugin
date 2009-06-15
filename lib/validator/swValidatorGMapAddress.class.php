@@ -37,12 +37,12 @@ class swValidatorGMapAddress extends sfValidatorSchema
       'lat'     => new sfValidatorNumber(array(
         'min' => -90,  
         'max' => 90,
-        'required' => true
+        'required' => false
       )),
       'lng'     => new sfValidatorNumber(array(
         'min' => -180, 
         'max' => 180,
-        'required' => true
+        'required' => false
       )),
       'address' => new swValidatorText(array(
         'required' => false

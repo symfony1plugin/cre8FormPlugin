@@ -199,8 +199,13 @@ function sw_get_api_loader_config()
     {
       throw new RuntimeException('no configuration set for the current host');
     }
-   
     $config = $config[$host];
+    /*
+    echo '<pre>';
+    print_r($config);
+    echo '</pre>';
+    die('dddd');
+    */
   }
   
   return $config;

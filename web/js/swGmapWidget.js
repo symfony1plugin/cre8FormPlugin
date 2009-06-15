@@ -143,3 +143,4 @@ swGmapWidget.reverseLookupCallback = function(response)
   widget.lat.val(place.Point.coordinates[1]);
   widget.lng.val(place.Point.coordinates[0]);
 }
+

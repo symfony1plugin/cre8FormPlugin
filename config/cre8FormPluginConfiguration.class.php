@@ -18,5 +18,11 @@ class cre8FormPluginConfiguration extends sfPluginConfiguration
     if(!sfConfig::get('sf_rich_text_fck_js_dir')) {
       sfConfig::set('sf_rich_text_fck_js_dir', $this->getName().DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'fckeditor');
     }
+    /*
+    if(sfConfig::get('app_swToolbox_autoload_helper', true))
+    {
+      $this->loadHelpers(array('swToolbox'));
+    }
+    */
   }
 }
