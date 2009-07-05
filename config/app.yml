@@ -1,4 +1,7 @@
 all:
+  universal_user_form:
+    username_to_lower_case:  true
+  
   dbformextraplugin:
     include_jquery:      true
     jquery_path:         /cre8FormPlugin/jquery/
