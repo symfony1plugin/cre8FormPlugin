@@ -64,6 +64,7 @@ class BaseUniversalUserForm extends BasesfGuardUserForm
   
   public function validatorUniqueUsername($validator, array $values)
   {
+//    die('type: ' . get_class($validator));  sfValidatorCallback
     if (array_key_exists('username', $values))
     {
       $c = new Criteria();
@@ -72,8 +73,9 @@ class BaseUniversalUserForm extends BasesfGuardUserForm
         $c->add(sfGuardUserPeer::ID, $this->getObject()->getId(), Criteria::NOT_EQUAL);
       }
       if(sfGuardUserPeer::doSelectOne($c)) {
-        $error = new sfValidatorError($validator, 'Email already exist in the system');
-        throw new sfValidatorErrorSchema($validator, array('username', $error));
+          $error = new sfValidatorError($validator, 'Email already exist in the system');
+          // throw an error bound to the password field
+          throw new sfValidatorErrorSchema($validator, array('username' => $error));
       }
     }
     return $values;
