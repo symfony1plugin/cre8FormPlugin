@@ -1,3 +1,4 @@
+<?php use_helper('Date'); ?>
 <table class="title-container" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td class="arrow-left" valign="middle" onclick="dp_prevMonth('<?php echo date('d.m.Y', strtotime(date('d', $time).'.'.Datepicker::getPrevMonth($time).'.'.Datepicker::getYearPrevMonth($time))); ?>')"></td>

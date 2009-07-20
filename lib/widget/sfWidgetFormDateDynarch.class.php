@@ -43,8 +43,8 @@ class sfWidgetFormDateDynarch extends sfWidgetFormInput
     {
       inputField  : \"$prefix\",            // ID of the input field
       button      : \"{$prefix}_trigger\",  // ID of the button
-      ifFormat    : \"%Y-%m-%d %G:%M:%S\",
-      daFormat    : \"%Y-%m-%d %G:%M:%S\",
+      ifFormat    : \"%Y-%m-%d %H:%M:%S\",
+      daFormat    : \"%Y-%m-%d %H:%M:%S\",
       showOthers  : true,
       showsTime   : true
     }
