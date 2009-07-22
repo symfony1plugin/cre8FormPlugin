@@ -24,9 +24,11 @@ class sfGuardValidatorUsernameOrEmail extends sfValidatorBase
   protected function doClean($value)
   {
     $clean = (string) $value;
-
+    
+    $c = new Criteria();
+    $c->add(sfGuardUserPeer::USERNAME, $clean);
     // user exists?
-    if (false !== sfGuardUserPeer::retrieveByUsernameOrEmailAddress($clean))
+    if (sfGuardUserPeer::doSelectOne($c))
     {
     	return $value;
     }

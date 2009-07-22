@@ -1,0 +1,1 @@
+New password: <?php echo $password; ?>

@@ -18,6 +18,12 @@ class cre8FormPluginConfiguration extends sfPluginConfiguration
     if(!sfConfig::get('sf_rich_text_fck_js_dir')) {
       sfConfig::set('sf_rich_text_fck_js_dir', $this->getName().DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'fckeditor');
     }
+    
+    if (in_array('cre8ForgottenPassword', sfConfig::get('sf_enabled_modules', array())))
+    {
+       $this->dispatcher->connect('routing.load_configuration', array('cre8ForgottenPasswordRouting', 'listenToRoutingLoadConfigurationEvent'));
+    }
+    
     /*
     if(sfConfig::get('app_swToolbox_autoload_helper', true))
     {
