@@ -20,7 +20,9 @@ class BaseUniversalUserForm extends BasesfGuardUserForm
     $this->widgetSchema['fid'] = new sfWidgetFormInputHidden();
     $this->validatorSchema['fid'] = new sfValidatorString(array('required' => true, 'trim' => true));
     $this->setDefault('fid', 'uuf');
-   
+    
+    $this->validatorSchema['username'] = new sfValidatorEmail(array('required' => true, 'trim' => true));
+    
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
     $this->validatorSchema['password']->setOption('required', false);
     $this->validatorSchema['password']->setOption('trim', true);
@@ -48,7 +50,7 @@ class BaseUniversalUserForm extends BasesfGuardUserForm
     $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
     
     // profile form?
-    $profileFormClass = sfConfig::get('app_sf_guard_plugin_profile_class', 'SfGuardUserProfile').'Form';
+    $profileFormClass = sfConfig::get('app_sf_guard_plugin_profile_class', 'sfGuardUserProfile').'Form';
     if (class_exists($profileFormClass))
     {
       $profileForm = new $profileFormClass();
