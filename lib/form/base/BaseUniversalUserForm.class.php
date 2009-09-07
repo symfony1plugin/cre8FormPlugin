@@ -102,6 +102,14 @@ class BaseUniversalUserForm extends BasesfGuardUserForm
       $values = $this->getValues();
       unset($values[$this->getPrimaryKey()]);
 
+      if($this->isMultipart()) {
+        foreach($values as $key => $value) {
+          if($value instanceof sfValidatedFile) {
+            $fileName = $value->save();
+            $values[$key] = $value->isSaved() ? $fileName : '';
+          }
+        }
+      }
       $profile->fromArray($values, BasePeer::TYPE_FIELDNAME);
       $profile->save();
     }
