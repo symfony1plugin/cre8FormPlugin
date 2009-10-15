@@ -112,11 +112,11 @@ FCKConfig.ToolbarSets["Default"] = [
 	'/',
 	['Style','FontFormat','FontName','FontSize'],
 	['TextColor','BGColor'],
-	['FitWindow','ShowBlocks','-','About']		// No comma for the last row.
+	['FitWindow','ShowBlocks']		// No comma for the last row.
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
-	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','About']
+	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink']
 ] ;
 
 FCKConfig.EnterMode = 'p' ;			// p | div | br

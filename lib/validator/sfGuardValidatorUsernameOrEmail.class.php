@@ -28,7 +28,7 @@ class sfGuardValidatorUsernameOrEmail extends sfValidatorBase
     $c = new Criteria();
     $c->add(sfGuardUserPeer::USERNAME, $clean);
     // user exists?
-    if (sfGuardUserPeer::doSelectOne($c))
+    if ($sfGuardUser = sfGuardUserPeer::doSelectOne($c))
     {
     	return $value;
     }

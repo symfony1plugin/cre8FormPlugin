@@ -2,6 +2,36 @@
 
 class BaseCre8ForgottenPasswordActions extends sfActions 
 {
+  
+  public function executeIndex(sfWebRequest $request)
+  {
+    $this->form = new Cre8ForgottenPasswordForm();
+    if($request->isMethod('post') && $request->getParameter('forgotten_password[fid]') == 'forgotten_password')
+    {
+      $this->form->bind($request->getParameter('forgotten_password'));
+      if($this->form->isValid())
+      {
+        $values = $this->form->getValues();
+        $c = new Criteria();
+        $c->add(sfGuardUserPeer::USERNAME, $values['email']);
+        $sfGuardUser = sfGuardUserPeer::doSelectOne($c);
+        
+        $emailParameters = array(
+          'sfGuardUser' => $sfGuardUser
+        );
+        
+        list($body, $part) = cre8Mail::getBodyAndAlternate('partial', 'cre8ForgottenPassword/email_request_new_password_html', 'cre8ForgottenPassword/email_request_new_password_txt', $emailParameters);
+        $options = array(
+          'parts'        => array( $part )
+        );
+        cre8Mail::send('New password', $body, $sfGuardUser->getUsername(), $options);
+        
+        $this->getUser()->setFlash('notice', 'An email has been sent to you with information how to reset your password.');
+        
+      }
+    }
+  }
+  
   public function executeResetPassword(sfWebRequest $request)
   {
     if($this->getUser()->isAuthenticated()) {
