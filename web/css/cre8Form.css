@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+.error_list {
+	text-align: center;
+	color: red;
+}
+em.required {
+	font-size:1.2em;
+	font-weight:bold;
+	margin:0px;
+	padding:0px;
+	color: red;
+}
+label.required {
+	font-weight:bold;
+}
+.cre8FormClrL {
+	clear: left;
+}
+.cre8FormClrR {
+	clear: right;
+}
+.cre8FormFloatL {
+	float: left;
+}
+.cre8FormFloatR {
+	float: right;
+}
+
