@@ -53,7 +53,7 @@ class cre8WidgetFormPropelRelatedSelect extends sfWidgetFormPropelSelect
    */
   public function getChoices()
   {
-    return array();
+    return array('0' => 'Enable JavaScript');
   }
   
   public function render($name, $value  = null, $attributes = array(), $errors = array())
@@ -61,6 +61,7 @@ class cre8WidgetFormPropelRelatedSelect extends sfWidgetFormPropelSelect
     $html = parent::render($name, $value, $attributes, $errors);
     $jsFunctionName = 'update_' . $this->generateId($name);
     // add ajax code to the defined event
+    $html .= " \n";
     $html .= sprintf(<<<EOF
 <script type="text/javascript" charset="utf-8">
   document.observe('dom:loaded', function() {
