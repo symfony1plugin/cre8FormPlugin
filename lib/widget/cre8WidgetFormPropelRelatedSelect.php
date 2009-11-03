@@ -74,14 +74,15 @@ class cre8WidgetFormPropelRelatedSelect extends sfWidgetFormPropelSelect
           method: 'post',
           parameters: { fid: $('%s').getValue() },
           onSuccess: function(transport) {
-          	//alert(transport.responseText.isJSON());
           	if(! transport.responseText.isJSON()) {
-          		alert('JavaScript Error: Ajax response is not a JSON format! (cre8WidgetFormPropelRelatedSelect)');
           		return;
           	}
           	var json = transport.responseText.evalJSON(true);
             cre8WidgetFormRelatedSelectUpdateSelectBox(html_id, json, '%s')
-          }
+          },
+          onException: function() {
+  		  	return;
+  		  }
         });
   	}
   	
