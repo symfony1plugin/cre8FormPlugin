@@ -12,10 +12,12 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
 {
   protected 
     
-    $rowFormat       = "<li class=\"cre8FormRow\">\n  %label%\n  %field%%error%%help%\n%hidden_fields%</li>\n",
+    $currentFormElementName = null,
+  
+    $rowFormat       = "<li class=\"cre8FormRow cre8FormRow_%field_id%\">\n  %label%\n  %field%%error%%help%\n%hidden_fields%</li>\n",
 //    $errorRowFormat  = "<li>\n%errors%</li>\n",
-    $helpFormat      = '<div class="fieldHelp">&uarr; %help%</div>',
-    $decoratorFormat = "<ul>\n  %content%</ul>",
+    $helpFormat      = '<div class="fieldHelp cre8FormFieldHelp_%field_id%">&uarr; %help%</div>',
+    $decoratorFormat = "<ul>\n  %content% \n</ul>",
     
 //    $rowFormat = "\n%error%\n<div class=\"formRow\">\n<div class=\"formLabel\">%label%</div>\n<div class=\"formField\">%field%\n%help%</div></div>\n%hidden_fields%",
     $errorRowFormat = "<div>\n%errors%<br /></div>\n", 
@@ -25,6 +27,7 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
     $errorListFormatInARow = "<ul class=\"error_list\">%errors%</ul>\n", 
     $errorRowFormatInARow =  "<li class=\"error\">&larr; %error%</li>\n", 
     $namedErrorRowFormatInARow = "<li class=\"error\">&larr; %error%</li>\n";
+    
  
   /**
    * @var sfValidatorSchema
@@ -105,6 +108,7 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
    */
   public function cre8Label($name, $attributes = array()) 
   {
+    $this->currentFormElementName = $name;
     $labelName = $this->generateLabelName($name);
     if (false === $labelName) {
       return '';
@@ -126,6 +130,18 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
   
   protected function isFieldRequired($name) {
     return ( ($validator = $this->getFieldValidator($name)) && $validator->getOption('required')) ? true : false;
+  }
+  
+  public function formatRow($label, $field, $errors = array(), $help = '', $hiddenFields = null)
+  {
+    return strtr($this->getRowFormat(), array(
+      '%label%'         => $label,
+      '%field%'         => $field,
+      '%error%'         => $this->formatErrorsForRow($errors),
+      '%help%'          => $this->formatHelp($help),
+      '%hidden_fields%' => is_null($hiddenFields) ? '%hidden_fields%' : $hiddenFields,
+      '%field_id%'		=> $this->currentFormElementName ? $this->widgetSchema->generateId($this->widgetSchema->generateName($this->currentFormElementName)) : 'R' . rand(101, 999)
+    ));
   }
   
 }
