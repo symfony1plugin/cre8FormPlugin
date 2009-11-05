@@ -3,6 +3,10 @@
 /**
  * Form Formatter which generates asterixs "*" to all labels where field is required
  *
+ * In configure():
+ * $decorator = new cre8FormFormatter($this->widgetSchema, $this->validatorSchema);
+ * $this->widgetSchema->addFormFormatter('custom', $decorator);
+ * $this->widgetSchema->setFormFormatterName('custom');
  */
 class cre8FormFormatter extends sfWidgetFormSchemaFormatter 
 {

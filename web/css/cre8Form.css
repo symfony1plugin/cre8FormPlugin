@@ -1,4 +1,17 @@
 @CHARSET "UTF-8";
+
+.cre8Form li {
+	list-style: none;
+}
+.cre8Form li ul {
+	clear: left;
+	float: left;
+}
+.cre8FormRow {
+	clear: left;
+	float: left;
+	width: 100%;
+}
 .error_list {
 	text-align: center;
 	color: red;
