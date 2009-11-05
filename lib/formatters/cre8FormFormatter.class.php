@@ -8,9 +8,9 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
 {
   protected 
     
-    $rowFormat       = "<li class=\"cre8FormRow\">\n  %error%%label%\n  %field%%help%\n%hidden_fields%</li>\n",
+    $rowFormat       = "<li class=\"cre8FormRow\">\n  %label%\n  %field%%error%%help%\n%hidden_fields%</li>\n",
 //    $errorRowFormat  = "<li>\n%errors%</li>\n",
-    $helpFormat      = '<div class="fieldHelp">%help%</div>',
+    $helpFormat      = '<div class="fieldHelp">&uarr; %help%</div>',
     $decoratorFormat = "<ul>\n  %content%</ul>",
     
 //    $rowFormat = "\n%error%\n<div class=\"formRow\">\n<div class=\"formLabel\">%label%</div>\n<div class=\"formField\">%field%\n%help%</div></div>\n%hidden_fields%",
@@ -19,8 +19,8 @@ class cre8FormFormatter extends sfWidgetFormSchemaFormatter
 //    $decoratorFormat = "%content%",
     
     $errorListFormatInARow = "<ul class=\"error_list\">%errors%</ul>\n", 
-    $errorRowFormatInARow =  "<li class=\"error\">&darr; %error% &darr;</li>\n", 
-    $namedErrorRowFormatInARow = "<li class=\"error\">&darr; %error% &darr;</li>\n";
+    $errorRowFormatInARow =  "<li class=\"error\">&larr; %error%</li>\n", 
+    $namedErrorRowFormatInARow = "<li class=\"error\">&larr; %error%</li>\n";
  
   /**
    * @var sfValidatorSchema
