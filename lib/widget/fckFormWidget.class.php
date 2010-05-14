@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 	* FCK Form widget
 	*
@@ -51,4 +51,3 @@ class fckFormWidget extends sfWidgetFormTextarea
 		return $editor->toHTML ();
 	}
 }
-?>
