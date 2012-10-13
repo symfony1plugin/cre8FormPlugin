@@ -6,7 +6,7 @@ class BaseCre8ForgottenPasswordActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->form = new Cre8ForgottenPasswordForm();
-    if($request->isMethod('post') && $request->getParameter('forgotten_password[fid]') == 'forgotten_password')
+    if($request->isMethod('post') && $request->getParameter('forgotten_password'))
     {
       $this->form->bind($request->getParameter('forgotten_password'));
       if($this->form->isValid())
@@ -20,11 +20,12 @@ class BaseCre8ForgottenPasswordActions extends sfActions
           'sfGuardUser' => $sfGuardUser
         );
         
-        list($body, $part) = cre8Mail::getBodyAndAlternate('partial', 'cre8ForgottenPassword/email_request_new_password_html', 'cre8ForgottenPassword/email_request_new_password_txt', $emailParameters);
-        $options = array(
-          'parts'        => array( $part )
+        $this->getMailer()->composeAndSend(
+          sfConfig::get('app_company_email', 'b.wrona@cre8newmedia.com'),
+          $sfGuardUser->getUsername(),
+          'New password',
+          $this->getPartial('cre8ForgottenPassword/email_request_new_password_txt', $emailParameters)
         );
-        cre8Mail::send('New password', $body, $sfGuardUser->getUsername(), $options);
         
         $this->getUser()->setFlash('notice', 'An email has been sent to you with information how to reset your password.');
         
@@ -57,15 +58,12 @@ class BaseCre8ForgottenPasswordActions extends sfActions
       $this->redirect($redirectTo);
     }
     
-    # Load body from components myModule : myComponentHTML and myComponentPLAIN
-    list($body, $part) = cre8Mail::getBodyAndAlternate('partial', 'cre8ForgottenPassword/email_generated_password_html', 'cre8ForgottenPassword/email_generated_password_txt', $emailParameters);
-    # Build options array, with the message parts, add embedded images, and attach a ZIP file
-    $options = array(
-      'parts'        => array( $part )
+    $this->getMailer()->composeAndSend(
+      sfConfig::get('app_company_email', 'b.wrona@cre8newmedia.com'),
+      $sfGuardUser->getUsername(),
+      'New password',
+      $this->getPartial('cre8ForgottenPassword/email_generated_password_txt', $emailParameters)
     );
-    // Embedded image can be magically used in the HTML body with <img src="%%IMG_logo%%" />
-    cre8Mail::send('New password', $body, $sfGuardUser->getUsername(), $options);
-    
     
   }
   

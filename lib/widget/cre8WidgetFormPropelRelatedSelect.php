@@ -1,6 +1,6 @@
 <?php
 
-class cre8WidgetFormPropelRelatedSelect extends sfWidgetFormPropelSelect 
+class cre8WidgetFormPropelRelatedSelect extends sfWidgetFormPropelChoice
 {
   protected $tag_id = null;
   
